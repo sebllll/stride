@@ -24,8 +24,8 @@
 
   <!-- Include platform dependent assembly when specified -->
   <PropertyGroup Condition="'$(XenkoGraphicsApiDependent)' == 'true' And '$(XenkoGraphicsApiDependentBuildAll)' == 'true'">
-    <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'net45'">win7-d3d11;win7-d3d12;win7-opengl;win7-opengles;win7-vulkan</RuntimeIdentifiers>
-    <RuntimeIdentifierDefault Condition="'$(TargetFramework)' == 'net45'">win7-d3d11</RuntimeIdentifierDefault>
+    <RuntimeIdentifiers Condition="$(TargetFramework.StartsWith('net4'))">win7-d3d11;win7-d3d12;win7-opengl;win7-opengles;win7-vulkan</RuntimeIdentifiers>
+    <RuntimeIdentifierDefault Condition="$(TargetFramework.StartsWith('net4'))">win7-d3d11</RuntimeIdentifierDefault>
     <RuntimeIdentifiers Condition="'$(TargetFramework)' == 'netstandard2.0'">linux-opengl;linux-vulkan</RuntimeIdentifiers>
     <RuntimeIdentifierDefault Condition="'$(TargetFramework)' == 'netstandard2.0'">linux-opengl</RuntimeIdentifierDefault>
 
