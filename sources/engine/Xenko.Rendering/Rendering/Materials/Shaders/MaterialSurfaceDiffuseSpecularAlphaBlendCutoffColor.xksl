@@ -1,0 +1,22 @@
+// Copyright (c) Xenko contributors (https://xenko.com) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
+namespace Xenko.Rendering.Materials
+{
+    /// <summary>
+    /// Modify the alpha color based on the matDiffuseSpecularAlphaBlend alpha
+    /// </summary>
+    shader MaterialSurfaceDiffuseSpecularAlphaBlendColor : IMaterialSurfacePixel, MaterialPixelShadingStream
+    {
+        override void Compute()
+        {
+            // Discard a pixel if the alpha from the material diffuse is less than the alpha discard limit
+            if (streams.shadingColorAlpha < streams.matAlphaDiscard)
+            {
+                discard;
+            }
+
+            // blends the pixel
+            streams.shadingColorAlpha = lerp(0, streams.shadingColorAlpha, streams.matDiffuseSpecularAlphaBlend.r);
+        }
+    };
+}
